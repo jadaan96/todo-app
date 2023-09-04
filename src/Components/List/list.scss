@@ -1,0 +1,42 @@
+.list-div{
+    width: 100%;
+
+    .cards{
+        width: 900px;   
+        // background-color: aqua;
+        padding: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.164);
+        margin: 10px;
+        border-radius: 15px;
+        .status{
+            background-color: rgb(64,192,87);
+            padding: 7px !important;
+            width: fit-content;
+            border-radius: 15px;
+            font-size: 15px;
+            color: white;
+            font-weight:600 ;
+            height: fit-content !important;
+        }
+        .top-section{
+            display: flex;
+            height: auto;
+            gap: 20px;
+            p{
+                margin: 0;
+                // padding: 7px;
+                width: fit-content;
+                border-radius: 15px;
+                font-size: 25px;
+                font-weight:700 ;
+
+            }
+        }
+        .Difficulty{
+            margin-left: 90%;
+        }
+        p{
+            font-size: 20px;
+        }
+    }
+}
