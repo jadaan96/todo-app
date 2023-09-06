@@ -10,8 +10,8 @@ function List() {
   const statItem= (activePage-1) * itemPerPage
   const endItem = statItem + itemPerPage
   const showingItems = Settings.list.slice(statItem, endItem).filter(item => item.complete === false)
+  console.log(showingItems);
   let totalpages =Math.ceil(Settings.list.length/3 )
-  console.log(statItem,totalpages);
 
   const completed = Settings.list.filter(item => item.complete === true)  
   function toggleComplete(id) {

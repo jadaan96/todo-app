@@ -11,7 +11,6 @@ function Todo() {
   });
   const Settings = useContext(settingContext);
 
-  const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
@@ -22,10 +21,10 @@ function Todo() {
     Settings.setList([...Settings.list, item]);
   }
 
-  function deleteItem(id) {
-    const items = Settings.list.filter((item) => item.id !== id);
-    Settings.setList(items);
-  }
+  // function deleteItem(id) {
+  //   const items = Settings.list.filter((item) => item.id !== id);
+  //   Settings.setList(items);
+  // }
 
   useEffect(() => {
     let incompleteCount = Settings.list.filter((item) => !item.complete).length;
