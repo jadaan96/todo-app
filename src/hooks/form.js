@@ -1,5 +1,6 @@
 import { useState, useEffect , useContext} from 'react';
 import { loginContext } from '../Context/AuthContext/AuthContext';
+import axios from "axios"
 
 const useForm = (callback, defaultValues={}) => {
   const {can} = useContext(loginContext); 
@@ -7,10 +8,13 @@ const useForm = (callback, defaultValues={}) => {
   const [values, setValues] = useState({});
 
   const handleSubmit = (event) => {
-    if(can('create')){
+    if(can('post')){
       event.preventDefault();
       callback({...values});
-
+      console.log( values,'1111111111');
+      axios.post(`http://localhost:3001/todo`, values).then((data) => {
+        console.log(data);
+      });
     } 
     event.preventDefault();
 
@@ -23,9 +27,7 @@ const useForm = (callback, defaultValues={}) => {
       value = event.target.value;
     } else {
       console.log('event from slider', event)
-      // hard coded for Mantine slider functionality 
-      // change "difficulty" language if desired
-      // change name dynamically if doing stretch goal!
+    
       name = 'difficulty';
       value = event;
     }
