@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, {  useState, useContext } from 'react';
 import useForm from '../../hooks/form';
 import { Setting } from '../../Context/Settings'
 import { v4 as uuid } from 'uuid';
