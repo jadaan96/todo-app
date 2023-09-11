@@ -1,11 +1,17 @@
-import React from 'react'
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
 
-function Header() {
+function NavTool() {
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
-  )
+    <>
+      <Navbar bg="primary" data-bs-theme="dark">
+        <Container>
+          <Navbar.Brand href="/" style={{ color: 'white' }}>Home</Navbar.Brand>
+          <Navbar.Brand href="/setting" style={{ color: 'white' }}>setting</Navbar.Brand>
+        </Container>
+      </Navbar>
+    </>
+  );
 }
 
-export default Header
+export default NavTool;
