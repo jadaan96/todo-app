@@ -1,12 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect , useContext} from 'react';
+import { loginContext } from '../Context/AuthContext/AuthContext';
 
 const useForm = (callback, defaultValues={}) => {
+  const {can} = useContext(loginContext); 
 
   const [values, setValues] = useState({});
 
   const handleSubmit = (event) => {
+    if(can('create')){
+      event.preventDefault();
+      callback({...values});
+
+    } 
     event.preventDefault();
-    callback({...values});
+
   };
 
   const handleChange = (event) => {
