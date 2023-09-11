@@ -8,12 +8,14 @@ import Header from './Components/Header/Header';
 import Footer from './Components/Footer/index';
 import Container from './Components/container/Container';
 import SettingForm from './Components/settingsForm';
+import LoginProvider from './Context/AuthContext/AuthContext';
 
 
 
 export default function App() {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
+<LoginProvider>
 
   <SettingFunction>
       <Header />
@@ -23,6 +25,8 @@ export default function App() {
       </Routes>
       <Footer />
     </SettingFunction>
+    </LoginProvider>
+
     </MantineProvider>
 
   );
