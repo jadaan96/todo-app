@@ -1,40 +1,18 @@
-import React from "react";
-import { useState } from 'react';
+'use strict'
 
-export const settingContext = React.createContext();
+import React, { useReducer } from 'react';
 
-export default function SettingFunction(props) {
-       let id = 0
+import { INITIAL_STATES, reducerHandler } from '../Reducer';
 
-    const [list, setList] = useState([
-           {
-               text: 'text 1',
-               complete: true,
-               assignee : '',
-               difficulty: 2,
-               id : id++
-          },
-           {
-               text : 'text 2',
-               complete: true,
-               assignee : '',
-               difficulty: 3,
-               id : id++
-          },
-           {
-               text : 'text 3',
-               complete: true,
-               assignee : '',
-               difficulty: 4,
-               id : id++
-          }
-     ]);
-     console.log(list);
+export const Setting = React.createContext();
 
+export default function Context(props) {
+
+    const [state, dispatch] = useReducer(reducerHandler, INITIAL_STATES)
 
     return (
-    <settingContext.Provider value={{setList,list}}>
-    {props.children}
-    </settingContext.Provider>
-  );
+        <Setting.Provider value={{ state, dispatch }}>
+            {props.children}
+        </Setting.Provider>
+    )
 }
