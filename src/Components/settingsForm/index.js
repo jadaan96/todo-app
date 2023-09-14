@@ -4,7 +4,9 @@ import { Text } from '@mantine/core';
 import { When } from "react-if";
 import './style.css'
 import { Card } from 'react-bootstrap';
+import { loginContext } from '../../Context/AuthContext/AuthContext';
 export default function SettingForm() {
+    const { loggedIn } = useContext(loginContext);
     const [data, setData] = useState([]);
     const [isChecked, setIsChecked] = useState(false);
     const [show, setShow] = useState(false);
@@ -18,22 +20,23 @@ export default function SettingForm() {
         e.preventDefault();
         const obj = {
             switch: isChecked,
-            perPage: e.target.perPage.value || 1,
+            perPage: e.target.perPage.value || 3,
             sort: e.target.sort.value || 'Difficulty',
         };
         localStorage.setItem('form', JSON.stringify(obj));
         setData(obj);
-        setting.dispatch({ type: 'formSetting', payload: obj });
         setShow(true);
     };
 
     return (
-        <>
-            <div className='bigContainer'>
-                <h1>Manage Setting</h1>
-            </div>
-            <div className='container'>
-                <form onSubmit={submitHandler} className='form'>
+        <React.Fragment>
+            {loggedIn && (
+                <div className="bigContainer">
+                    <h1>Manage Setting</h1>
+                </div>
+            )}
+            <div className="container">
+                <form onSubmit={submitHandler} className="form">
                     <p>Show completed toDo</p>
                     <label className="switch">
                         <input
@@ -43,26 +46,36 @@ export default function SettingForm() {
                             onChange={toggleSwitch}
                         />
                         <span className="slider round"></span>
-                    </label><br />
-                    <label> Item per page
-                        <input type='number' name='perPage' />
                     </label>
-                    <label> Sort Keyword
-                        <input type='text' name='sort' placeholder='Difficulty' />
-                    </label><br />
-                    <button type='submit' className='btns'>Set new Setting</button>
+                    <br />
+                    <label htmlFor="perPage">Item per page</label>
+                    <input type="number" name="perPage" id="perPage" />
+                    <label htmlFor="sort">Sort Keyword</label>
+                    <input type="text" name="sort" id="sort" placeholder="Difficulty" />
+                    <br />
+                    <button type="submit" className="btns">
+                        Set new Setting
+                    </button>
                 </form>
                 <When condition={show}>
                     <Card style={{ width: '18rem' }}>
                         <Card.Body>
-                            <Card.Title>Updated Settings</Card.Title><br />
-                            <Text><span style={{ color: 'red', fontWeight: 600 }}>{data.switch ? 'Show' : 'Hide'}</span> The Completed Todos</Text><br />
-                            <Text>Items Per Page: {data.perPage}</Text><br />
-                            <Text>Sort Keyword: {data.sort}</Text><br />
+                            <Card.Title>Updated Settings</Card.Title>
+                            <br />
+                            <Text>
+                                <span style={{ color: 'red', fontWeight: 600 }}>
+                                    {data.switch ? 'Show' : 'Hide'} The Completed Todos
+                                </span>
+                            </Text>
+                            <br />
+                            <Text>Items Per Page: {data.perPage}</Text>
+                            <br />
+                            <Text>Sort Keyword: {data.sort}</Text>
+                            <br />
                         </Card.Body>
                     </Card>
                 </When>
             </div>
-        </>
+        </React.Fragment>
     );
 }
